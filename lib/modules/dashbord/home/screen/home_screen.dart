@@ -97,36 +97,36 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               //IconButton
             ),
-            Obx(
-              () => SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  semanticIndexOffset: homeController.todayIndex.value,
-                  childCount: homeController.tempModel?.length ?? 0,
-                  (context, index) {
-                    String todayYear = DateTime.now().toString().substring(0, 4);
-                    String todayMonth = DateTime.now().toString().substring(5, 7);
-                    String todayDay = DateTime.now().toString().substring(8, 10);
-
-                    String apiYear = homeController.tempModel?[index].time.toString().substring(0, 4) ?? '0000';
-                    String apiMonth = homeController.tempModel?[index].time.toString().substring(4, 6) ?? '00';
-                    String apiDay = homeController.tempModel?[index].time.toString().substring(6, 8) ?? '00';
-                    DateTime parsedDate =
-                        DateFormat("yyyy-MM-dd hh:mm").parse("$apiYear-$apiMonth-$apiDay 00:00:00.000000");
-                    DateTime nowDate =
-                        DateFormat("yyyy-MM-dd hh:mm").parse("$todayYear-$todayMonth-$todayDay 00:00:00.000000");
-                    int diff = parsedDate.difference(nowDate).inDays;
-                    return homeBox(
-                      date: diff == 0
-                          ? 'Today'
-                          : parsedDate.isAfter(DateTime.now()) && diff == 1
-                              ? 'Tomorrow'
-                              : displayDayAndDateTimes(homeController.tempModel?[index].time ?? "", "EEE, dd MMM"),
-                      teamList: homeController.tempModel?[index].data,
-                    );
-                  },
-                ),
-              ),
-            ),
+            // Obx(
+            //   () => SliverList(
+            //     delegate: SliverChildBuilderDelegate(
+            //       semanticIndexOffset: homeController.todayIndex.value,
+            //       childCount: homeController.tempModel?.length ?? 0,
+            //       (context, index) {
+            //         String todayYear = DateTime.now().toString().substring(0, 4);
+            //         String todayMonth = DateTime.now().toString().substring(5, 7);
+            //         String todayDay = DateTime.now().toString().substring(8, 10);
+            //
+            //         String apiYear = homeController.tempModel?[index].time.toString().substring(0, 4) ?? '0000';
+            //         String apiMonth = homeController.tempModel?[index].time.toString().substring(4, 6) ?? '00';
+            //         String apiDay = homeController.tempModel?[index].time.toString().substring(6, 8) ?? '00';
+            //         DateTime parsedDate =
+            //             DateFormat("yyyy-MM-dd hh:mm").parse("$apiYear-$apiMonth-$apiDay 00:00:00.000000");
+            //         DateTime nowDate =
+            //             DateFormat("yyyy-MM-dd hh:mm").parse("$todayYear-$todayMonth-$todayDay 00:00:00.000000");
+            //         int diff = parsedDate.difference(nowDate).inDays;
+            //         return homeBox(
+            //           date: diff == 0
+            //               ? 'Today'
+            //               : parsedDate.isAfter(DateTime.now()) && diff == 1
+            //                   ? 'Tomorrow'
+            //                   : displayDayAndDateTimes(homeController.tempModel?[index].time ?? "", "EEE, dd MMM"),
+            //           teamList: homeController.tempModel?[index].data,
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
           ], //<Widget>[]
         ),
       ),
