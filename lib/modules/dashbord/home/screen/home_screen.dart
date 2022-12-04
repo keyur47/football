@@ -1,5 +1,6 @@
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football/ads/interstitial_ad.dart';
 import 'package:football/helper/date_helper.dart';
+import 'package:football/helper/firebase_analyticsUtils.dart';
 import 'package:football/helper/loading_helper.dart';
 import 'package:football/model/arguments_match_detail_model.dart';
 import 'package:football/modules/dashbord/home/controller/home_controller.dart';
@@ -25,38 +26,18 @@ class HomeScreen extends KFDrawerContent {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeController homeController = Get.find();
-  bool _opacity = false;
-
-  // AutoScrollController? controller;
 
   @override
   void initState() {
-    // Future.delayed(const Duration(seconds: 3));
-    // api();
-    // controller = AutoScrollController(
-    //   viewportBoundaryGetter: () => Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
-    // );
-    // controller?.addListener(() {
-    //   if ((controller?.position.pixels ?? 0.0) >= 20.0) {
-    //     _opacity = true;
-    //     setState(() {});
-    //   } else {
-    //     _opacity = false;
-    //     setState(() {});
-    //   }
-    // });
+    FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.homeScreen);
 
     super.initState();
   }
 
-  // api() async {
-  //   await homeController.fixtureApiCall();
-  // }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
+      backgroundColor: AppColors.grey.withOpacity(0.1),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -66,18 +47,18 @@ class _HomeScreenState extends State<HomeScreen> {
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
                 titlePadding: EdgeInsets.only(
-                  left: SizeUtils.horizontalBlockSize * 10,
+                  left: SizeUtils.horizontalBlockSize * 11,
                   bottom: SizeUtils.horizontalBlockSize * 3,
                 ),
                 // centerTitle: true,
-                title: const AppText(
-                  text: StringsUtils.worldCup,
-                  fontWeight: FontWeight.w600,
+                title: AppText(
+                  text: StringsUtils.score,
+                  fontWeight: FontWeight.w500,
+                  fontSize: SizeUtils.fSize_18(),
                   color: AppColors.white,
                 ),
-                background: Image.network(
-                  "https://cdn.wallpapersafari.com/92/22/FdICR6.jpg",
-                  // AssetsPath.backgroundImageSliverAppBar,
+                background: Image.asset(
+                  AssetsPath.scoreBackground,
                   fit: BoxFit.cover,
                   height: SizeUtils.horizontalBlockSize * 10,
                 ),
@@ -89,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return IconButton(
                     icon: Icon(
                       Icons.menu,
-                      size: SizeUtils.horizontalBlockSize * 8,
+                      size: SizeUtils.horizontalBlockSize * 5.5,
                     ),
                     onPressed: widget.onMenuPressed,
                   );
@@ -97,42 +78,139 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               //IconButton
             ),
-            // Obx(
-            //   () => SliverList(
-            //     delegate: SliverChildBuilderDelegate(
-            //       semanticIndexOffset: homeController.todayIndex.value,
-            //       childCount: homeController.tempModel?.length ?? 0,
-            //       (context, index) {
-            //         String todayYear = DateTime.now().toString().substring(0, 4);
-            //         String todayMonth = DateTime.now().toString().substring(5, 7);
-            //         String todayDay = DateTime.now().toString().substring(8, 10);
-            //
-            //         String apiYear = homeController.tempModel?[index].time.toString().substring(0, 4) ?? '0000';
-            //         String apiMonth = homeController.tempModel?[index].time.toString().substring(4, 6) ?? '00';
-            //         String apiDay = homeController.tempModel?[index].time.toString().substring(6, 8) ?? '00';
-            //         DateTime parsedDate =
-            //             DateFormat("yyyy-MM-dd hh:mm").parse("$apiYear-$apiMonth-$apiDay 00:00:00.000000");
-            //         DateTime nowDate =
-            //             DateFormat("yyyy-MM-dd hh:mm").parse("$todayYear-$todayMonth-$todayDay 00:00:00.000000");
-            //         int diff = parsedDate.difference(nowDate).inDays;
-            //         return homeBox(
-            //           date: diff == 0
-            //               ? 'Today'
-            //               : parsedDate.isAfter(DateTime.now()) && diff == 1
-            //                   ? 'Tomorrow'
-            //                   : displayDayAndDateTimes(homeController.tempModel?[index].time ?? "", "EEE, dd MMM"),
-            //           teamList: homeController.tempModel?[index].data,
-            //         );
-            //       },
-            //     ),
-            //   ),
-            // ),
+            Obx(
+              () => SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    String todayYear = DateTime.now().toString().substring(0, 4);
+                    String todayMonth = DateTime.now().toString().substring(5, 7);
+                    String todayDay = DateTime.now().toString().substring(8, 10);
+
+                    String apiYear = homeController.tempModel?[index].time.toString().substring(0, 4) ?? '0000';
+                    String apiMonth = homeController.tempModel?[index].time.toString().substring(4, 6) ?? '00';
+                    String apiDay = homeController.tempModel?[index].time.toString().substring(6, 8) ?? '00';
+                    DateTime parsedDate =
+                        DateFormat("yyyy-MM-dd hh:mm").parse("$apiYear-$apiMonth-$apiDay 00:00:00.000000");
+                    DateTime nowDate =
+                        DateFormat("yyyy-MM-dd hh:mm").parse("$todayYear-$todayMonth-$todayDay 00:00:00.000000");
+                    int diff = parsedDate.difference(nowDate).inDays;
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: SizeUtils.horizontalBlockSize * 1,
+                        ),
+                        homeBox(
+                          date: diff == 0
+                              ? 'Today'
+                              : parsedDate.isAfter(DateTime.now()) && diff == 1
+                                  ? 'Tomorrow'
+                                  : displayDayAndDateTimes(homeController.tempModel?[index].time ?? "", "EEE, dd MMM"),
+                          teamList: homeController.tempModel?[index].data,
+                        ),
+                      ],
+                    );
+                  },
+                  semanticIndexOffset: homeController.todayIndex.value,
+                  childCount: homeController.tempModel?.length ?? 0,
+                ),
+              ),
+            ),
           ], //<Widget>[]
         ),
-      ),
-      debugShowCheckedModeBanner: false,
     );
   }
+
+  //
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     backgroundColor: AppColors.grey.withOpacity(0.1),
+  //     appBar: CustomAppBar(
+  //       automaticallyImplyLeading: false,
+  //       leadingWidth: SizeUtils.horizontalBlockSize * 8,
+  //       leading: Builder(
+  //         builder: (context) {
+  //           return IconButton(
+  //             icon: Padding(
+  //               padding: EdgeInsets.only(
+  //                 top: SizeUtils.horizontalBlockSize * 0.4,
+  //                 left: SizeUtils.horizontalBlockSize * 3,
+  //               ),
+  //               child: Icon(
+  //                 Icons.menu,
+  //                 size: SizeUtils.horizontalBlockSize * 5.5,
+  //               ),
+  //             ),
+  //             onPressed: widget.onMenuPressed,
+  //           );
+  //         },
+  //       ),
+  //       title: AppText(
+  //         text: StringsUtils.score,
+  //         color: AppColors.white,
+  //         fontWeight: FontWeight.w500,
+  //         fontSize: SizeUtils.fSize_18(),
+  //       ),
+  //     ),
+  //
+  //     body: Column(
+  //       children: [
+  //         Expanded(
+  //           child: Obx(
+  //             () => homeController.isLoading.value
+  //                 ? const Loading(
+  //                     colors: AppColors.primaryColor,
+  //                   )
+  //                 : ScrollablePositionedList.builder(
+  //                     initialScrollIndex: homeController.todayIndex.value, //you can pass the desired index here//
+  //
+  //                     // controller: homeController.dateScrollController,
+  //                     padding: EdgeInsets.symmetric(
+  //                       vertical: SizeUtils.horizontalBlockSize * 1.5,
+  //                     ),
+  //                     itemCount: homeController.tempModel?.length ?? 0,
+  //                     // separatorBuilder: (context, index) {
+  //                     //   return const SizedBox();
+  //                     // },
+  //                     itemBuilder: (context, index) {
+  //                       String todayYear = DateTime.now().toString().substring(0, 4);
+  //                       String todayMonth = DateTime.now().toString().substring(5, 7);
+  //                       String todayDay = DateTime.now().toString().substring(8, 10);
+  //
+  //                       String apiYear = homeController.tempModel?[index].time.toString().substring(0, 4) ?? '0000';
+  //                       String apiMonth = homeController.tempModel?[index].time.toString().substring(4, 6) ?? '00';
+  //                       String apiDay = homeController.tempModel?[index].time.toString().substring(6, 8) ?? '00';
+  //                       DateTime parsedDate =
+  //                           DateFormat("yyyy-MM-dd hh:mm").parse("$apiYear-$apiMonth-$apiDay 00:00:00.000000");
+  //                       DateTime nowDate =
+  //                           DateFormat("yyyy-MM-dd hh:mm").parse("$todayYear-$todayMonth-$todayDay 00:00:00.000000");
+  //                       int diff = parsedDate.difference(nowDate).inDays;
+  //
+  //                       return Padding(
+  //                         padding: EdgeInsets.symmetric(vertical: SizeUtils.horizontalBlockSize * 0.3),
+  //                         child: AutoScrollTag(
+  //                           key: ValueKey(index),
+  //                           controller: homeController.controller ?? AutoScrollController(),
+  //                           index: index,
+  //                           child: homeBox(
+  //                             date: diff == 0
+  //                                 ? 'Today'
+  //                                 : parsedDate.isAfter(DateTime.now()) && diff == 1
+  //                                     ? 'Tomorrow'
+  //                                     : displayDayAndDateTimes(
+  //                                         homeController.tempModel?[index].time ?? "", "EEE, dd MMM"),
+  //                             teamList: homeController.tempModel?[index].data,
+  //                           ),
+  //                         ),
+  //                       );
+  //                     },
+  //                   ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget homeBox({
     String? date,
@@ -176,6 +254,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () async {
+                        homeController.teamOne.clear();
+                        homeController.teamTwo.clear();
+                        InterstitalAd.showInterstitialAd();
                         ArgumentsMatchDetailModel model = ArgumentsMatchDetailModel(
                             time: homeController.dateFormat(teamList?[index].time?.substring(8, 12) ?? ""),
                             teamNameOne: teamList?[index].team1?.teamName,
@@ -239,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
 
                             SizedBox(
-                              width: SizeUtils.horizontalBlockSize * 2,
+                              width: SizeUtils.horizontalBlockSize * 2.7,
                             ),
                             SizedBox(
                               width: SizeUtils.horizontalBlockSize * 12,
@@ -256,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             SizedBox(
-                              width: SizeUtils.horizontalBlockSize * 2,
+                              width: SizeUtils.horizontalBlockSize * 2.7,
                             ),
                             // const CircleAvatar(
                             //   radius: 13.0,

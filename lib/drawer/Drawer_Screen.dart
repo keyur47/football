@@ -1,19 +1,18 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:football/modules/dashbord/home/screen/home_screen.dart';
 import 'package:football/modules/dashbord/news/screen/news_screen.dart';
 import 'package:football/modules/dashbord/ranking/screen/ranking_screen.dart';
+import 'package:football/modules/dashbord/setting/setting_screen.dart';
 import 'package:football/utils/app_colors.dart';
 import 'package:football/utils/assets_path.dart';
 import 'package:football/utils/size_utils.dart';
 import 'package:football/utils/strings_utils.dart';
 import 'package:kf_drawer/kf_drawer.dart';
-
 import 'RegisterClassses.dart';
 
 class DrawerScreen extends StatefulWidget {
+  const DrawerScreen({Key? key}) : super(key: key);
+
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
@@ -30,7 +29,7 @@ class _DrawerScreenState extends State<DrawerScreen> with SingleTickerProviderSt
       items: [
         KFDrawerItem.initWithPage(
           text: const Text(
-            StringsUtils.news,
+            StringsUtils.score,
             style: TextStyle(
               color: AppColors.white,
               fontSize: 18,
@@ -75,6 +74,23 @@ class _DrawerScreenState extends State<DrawerScreen> with SingleTickerProviderSt
             size: 28,
           ),
           page: RankingScreen(),
+        ),
+        KFDrawerItem.initWithPage(
+          text: const Text(
+            StringsUtils.setting,
+            style: TextStyle(
+              color: AppColors.white,
+              // fontWeight: FontWeight.w600,
+
+              fontSize: 18,
+            ),
+          ),
+          icon: const Icon(
+            Icons.settings,
+            color: AppColors.white,
+            size: 28,
+          ),
+          page: SettingScreen(),
         ),
       ],
     );
@@ -148,7 +164,7 @@ class _DrawerScreenState extends State<DrawerScreen> with SingleTickerProviderSt
         //     tileMode: TileMode.repeated,
         //   ),
         // ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           // boxShadow: [
           //   BoxShadow(
           //     offset: Offset(0, 1),

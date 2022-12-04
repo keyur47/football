@@ -1,3 +1,4 @@
+import 'package:football/helper/firebase_analyticsUtils.dart';
 import 'package:football/helper/loading_helper.dart';
 import 'package:football/modules/dashbord/home/controller/home_controller.dart';
 import 'package:football/modules/dashbord/news/controller/news_controller.dart';
@@ -20,8 +21,6 @@ class RankingScreen extends KFDrawerContent {
 }
 
 class _RankingScreenState extends State<RankingScreen> {
-
-
   final RankingController rankingController = Get.find();
 
   final HomeController homeController = Get.find();
@@ -29,30 +28,41 @@ class _RankingScreenState extends State<RankingScreen> {
   final NewsController newsController = Get.find();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.rankingScreen);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         automaticallyImplyLeading: false,
-        title: const AppText(
+        leadingWidth: SizeUtils.horizontalBlockSize * 8,
+        leading: Builder(
+          builder: (context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                top: SizeUtils.horizontalBlockSize * 0.4,
+                left: SizeUtils.horizontalBlockSize * 3,
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  size: SizeUtils.horizontalBlockSize * 5.5,
+                ),
+                onPressed: widget.onMenuPressed,
+              ),
+            );
+          },
+        ),
+        title: AppText(
           text: StringsUtils.ranking,
           color: AppColors.white,
           fontWeight: FontWeight.w500,
+          fontSize: SizeUtils.fSize_18(),
         ),
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(Icons.menu_rounded,color: AppColors.white,),
-            onPressed: widget.onMenuPressed,
-          ),
-        ),
-        // action: [
-        //   IconButton(
-        //     icon: const Icon(
-        //       Icons.more_vert_sharp,
-        //       color: AppColors.white,
-        //     ),
-        //     onPressed: () {},
-        //   ),
-        // ],
       ),
       body: RefreshIndicator(
         color: Colors.black,
@@ -107,7 +117,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                             ],
                                             borderRadius: BorderRadius.circular(15)),
                                         child: Padding(
-                                          padding: const EdgeInsets.only(left: 10, right: 10, top: 6, bottom: 6),
+                                          padding: const EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 3),
                                           child: AppText(
                                             text: rankingController.tableType[index],
                                             fontSize: SizeUtils.fSize_13(),
@@ -235,7 +245,7 @@ class _RankingScreenState extends State<RankingScreen> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: SizeUtils.verticalBlockSize * 2.3,
+                        top: SizeUtils.verticalBlockSize * 2,
                         left: SizeUtils.horizontalBlockSize * 4,
                       ),
                       child: Row(
@@ -245,28 +255,28 @@ class _RankingScreenState extends State<RankingScreen> {
                               child: Text(
                                 subt?.name.toString() ?? '',
                                 // 'Grp. A',
-                                style:
-                                    const TextStyle(color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                                style: const TextStyle(
+                                    color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 12.9),
                               )),
                           Expanded(
                             flex: 1,
                             child: Text(
                               'Pl',
-                              style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                              style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Text(
                               'GD',
-                              style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                              style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Text(
                               'Pts',
-                              style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                              style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                             ),
                           ),
                           SizedBox(
@@ -283,13 +293,13 @@ class _RankingScreenState extends State<RankingScreen> {
                       children: List.generate(
                         rankingController.rankingTableModel.value.root?.table?.subt?[index].t?.length ?? 0,
                         (index1) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
+                          padding: const EdgeInsets.only(bottom: 6),
                           child: Row(
                             children: [
                               index1 == 0 || index1 == 1
                                   ? Container(
                                       width: 2.5,
-                                      height: SizeUtils.verticalBlockSize * 6,
+                                      height: SizeUtils.verticalBlockSize * 6.5,
                                       decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.only(
                                               topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
@@ -298,7 +308,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                   : const SizedBox(width: 2.5),
                               Expanded(
                                 child: SizedBox(
-                                  height: SizeUtils.verticalBlockSize * 6,
+                                  height: SizeUtils.verticalBlockSize * 6.5,
                                   child: Row(
                                     children: [
                                       Expanded(
@@ -308,11 +318,19 @@ class _RankingScreenState extends State<RankingScreen> {
                                             SizedBox(
                                               width: SizeUtils.horizontalBlockSize * 3,
                                             ),
-                                            Text(
-                                              '${index1 + 1}',
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14),
-                                            ),
+                                            index1 == 0
+                                                ? AppText(
+                                                    text: ' ${index1 + 1}',
+                                                    textAlign: TextAlign.end,
+                                                    color: AppColors.black,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14)
+                                                : AppText(
+                                                    text: '${index1 + 1}',
+                                                    textAlign: TextAlign.end,
+                                                    color: AppColors.black,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14),
                                             SizedBox(
                                               width: SizeUtils.horizontalBlockSize * 2.8,
                                             ),
@@ -344,7 +362,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                         child: Text(
                                           ' ${(int.parse(subt?.t?[index1].w ?? '0')) + (int.parse(subt?.t?[index1].d ?? '0')) + (int.parse(subt?.t?[index1].l ?? '0'))}',
                                           style: const TextStyle(
-                                              color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 12.9),
                                         ),
                                       ),
                                       Expanded(
@@ -360,7 +378,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                                   ? '  0'
                                                   : '${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}',
                                           style: const TextStyle(
-                                              color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 12.9),
                                         ),
                                       ),
                                       SizedBox(width: SizeUtils.horizontalBlockSize * 1),
@@ -420,14 +438,14 @@ class _RankingScreenState extends State<RankingScreen> {
               bottom: SizeUtils.verticalBlockSize * 1.8,
             ),
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColors.white, boxShadow: [
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(9), color: AppColors.white, boxShadow: [
                 BoxShadow(color: AppColors.grey[90]!, blurRadius: 2),
               ]),
               child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      top: SizeUtils.verticalBlockSize * 2.3,
+                      top: SizeUtils.verticalBlockSize * 2,
                       left: SizeUtils.horizontalBlockSize * 4,
                     ),
                     child: Row(
@@ -436,14 +454,15 @@ class _RankingScreenState extends State<RankingScreen> {
                             flex: 6,
                             child: Text(
                               subt?.name.toString() ?? '',
-                              style: const TextStyle(color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                              style:
+                                  const TextStyle(color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 12.9),
                             )),
                         Expanded(
                           flex: 1,
                           child: Text(
                             'Pl',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                           ),
                         ),
                         Expanded(
@@ -451,7 +470,7 @@ class _RankingScreenState extends State<RankingScreen> {
                           child: Text(
                             'W',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                           ),
                         ),
                         Expanded(
@@ -459,7 +478,7 @@ class _RankingScreenState extends State<RankingScreen> {
                           child: Text(
                             'D',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                           ),
                         ),
                         Expanded(
@@ -467,7 +486,7 @@ class _RankingScreenState extends State<RankingScreen> {
                           child: Text(
                             'L',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                           ),
                         ),
                         Expanded(
@@ -475,7 +494,7 @@ class _RankingScreenState extends State<RankingScreen> {
                           child: Text(
                             '+/-',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 12.5),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 12.5),
                           ),
                         ),
                         SizedBox(width: SizeUtils.horizontalBlockSize * 2),
@@ -484,7 +503,7 @@ class _RankingScreenState extends State<RankingScreen> {
                           child: Text(
                             'GD',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                           ),
                         ),
                         Expanded(
@@ -492,7 +511,7 @@ class _RankingScreenState extends State<RankingScreen> {
                           child: Text(
                             'Pts',
                             // textAlign: TextAlign.center,
-                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                            style: TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                           ),
                         ),
                         SizedBox(
@@ -509,13 +528,13 @@ class _RankingScreenState extends State<RankingScreen> {
                     children: List.generate(
                       rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?.length ?? 0,
                       (index1) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
+                        padding: const EdgeInsets.only(bottom: 6),
                         child: Row(
                           children: [
                             index1 == 0 || index1 == 1
                                 ? Container(
                                     width: 2.5,
-                                    height: SizeUtils.verticalBlockSize * 6,
+                                    height: SizeUtils.verticalBlockSize * 6.5,
                                     decoration: BoxDecoration(
                                         borderRadius: const BorderRadius.only(
                                             topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
@@ -524,7 +543,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                 : const SizedBox(width: 2.5),
                             Expanded(
                               child: SizedBox(
-                                height: SizeUtils.verticalBlockSize * 6,
+                                height: SizeUtils.verticalBlockSize * 6.5,
                                 child: Row(
                                   children: [
                                     Expanded(
@@ -534,11 +553,19 @@ class _RankingScreenState extends State<RankingScreen> {
                                           SizedBox(
                                             width: SizeUtils.horizontalBlockSize * 3,
                                           ),
-                                          Text(
-                                            '${index1 + 1}',
-                                            style: const TextStyle(
-                                                color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14),
-                                          ),
+                                          index1 == 0
+                                              ? AppText(
+                                                  text: ' ${index1 + 1}',
+                                                  textAlign: TextAlign.end,
+                                                  color: AppColors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14)
+                                              : AppText(
+                                                  text: '${index1 + 1}',
+                                                  textAlign: TextAlign.end,
+                                                  color: AppColors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14),
                                           SizedBox(
                                             width: SizeUtils.horizontalBlockSize * 2.8,
                                           ),
@@ -702,14 +729,14 @@ class _RankingScreenState extends State<RankingScreen> {
                 bottom: SizeUtils.verticalBlockSize * 1.8,
               ),
               child: Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColors.white, boxShadow: [
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(9), color: AppColors.white, boxShadow: [
                   BoxShadow(color: AppColors.grey[90]!, blurRadius: 2),
                 ]),
                 child: Column(
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                        top: SizeUtils.verticalBlockSize * 2.3,
+                        top: SizeUtils.verticalBlockSize * 2,
                         left: SizeUtils.horizontalBlockSize * 4,
                       ),
                       child: Row(
@@ -718,8 +745,8 @@ class _RankingScreenState extends State<RankingScreen> {
                               flex: 7,
                               child: Text(
                                 subt?.name.toString() ?? '',
-                                style:
-                                    const TextStyle(color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 14),
+                                style: const TextStyle(
+                                    color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 12.9),
                               )),
                           Expanded(
                             flex: 3,
@@ -748,7 +775,6 @@ class _RankingScreenState extends State<RankingScreen> {
                             formModel.Form? form;
                             try {
                               if (rankingController.formModel.value.teamForm?.length != null) {
-                                print("teamForm===>${teamForm}");
                                 teamForm = rankingController.formModel.value.teamForm?.firstWhere(
                                     (element) => subt?.t?[index1].id == element.teamId.toString(),
                                     orElse: () => TeamForm());
@@ -761,14 +787,20 @@ class _RankingScreenState extends State<RankingScreen> {
                             } catch (e, st) {
                               print("error==>$e $st");
                             }
+                            List tempList = [];
+                            for (int i = 0; i < form!.wdlIndicators!.length; i++) {
+                              tempList.add(form.wdlIndicators.toString().substring(i, i + 1));
+                            }
+                            int lastIndex = tempList.length == 0 ? 0 : tempList.length - 1;
+
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
+                              padding: const EdgeInsets.only(bottom: 6),
                               child: Row(
                                 children: [
                                   index1 == 0 || index1 == 1
                                       ? Container(
                                           width: 2.5,
-                                          height: SizeUtils.verticalBlockSize * 6,
+                                          height: SizeUtils.verticalBlockSize * 6.5,
                                           decoration: BoxDecoration(
                                               borderRadius: const BorderRadius.only(
                                                   topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
@@ -777,7 +809,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                       : const SizedBox(width: 2.5),
                                   Expanded(
                                     child: SizedBox(
-                                      height: SizeUtils.verticalBlockSize * 6,
+                                      height: SizeUtils.verticalBlockSize * 6.5,
                                       child: Row(
                                         children: [
                                           Expanded(
@@ -788,13 +820,19 @@ class _RankingScreenState extends State<RankingScreen> {
                                                 SizedBox(
                                                   width: SizeUtils.horizontalBlockSize * 3,
                                                 ),
-                                                Text(
-                                                  '${index1 + 1}',
-                                                  style: const TextStyle(
-                                                      color: AppColors.black,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontSize: 14),
-                                                ),
+                                                index1 == 0
+                                                    ? AppText(
+                                                        text: ' ${index1 + 1}',
+                                                        textAlign: TextAlign.end,
+                                                        color: AppColors.black,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontSize: 14)
+                                                    : AppText(
+                                                        text: '${index1 + 1}',
+                                                        textAlign: TextAlign.end,
+                                                        color: AppColors.black,
+                                                        fontWeight: FontWeight.w500,
+                                                        fontSize: 14),
                                                 SizedBox(
                                                   width: SizeUtils.horizontalBlockSize * 2.8,
                                                 ),
@@ -817,56 +855,77 @@ class _RankingScreenState extends State<RankingScreen> {
                                                   style: const TextStyle(
                                                       color: AppColors.black,
                                                       fontWeight: FontWeight.w400,
-                                                      fontSize: 13),
+                                                      fontSize: 14),
                                                 ),
                                                 const Spacer(),
-                                                Transform(
-                                                  transform: Matrix4.translationValues(0, 16, 0),
-                                                  child: Column(
-                                                    children: [
-                                                      if (form?.wdlIndicators != null)
-                                                        form?.wdlIndicators == ''
-                                                            ? const SizedBox()
-                                                            : Container(
-                                                                decoration: BoxDecoration(
-                                                                  borderRadius: BorderRadius.circular(4),
-                                                                  color: form?.wdlIndicators?.toLowerCase() == 'd'
-                                                                      ? AppColors.grey
-                                                                      : form?.wdlIndicators?.toLowerCase() == 'w'
-                                                                          ? AppColors.green
-                                                                          : AppColors.red,
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: form?.wdlIndicators?.toLowerCase() == 'd'
-                                                                      ? const EdgeInsets.symmetric(
-                                                                          horizontal: 4, vertical: 2)
-                                                                      : const EdgeInsets.symmetric(
-                                                                          horizontal: 3, vertical: 2),
-                                                                  child: AppText(
-                                                                    text: form?.wdlIndicators?.toLowerCase() == 'l'
-                                                                        ? ' L '
-                                                                        : form?.wdlIndicators ?? "",
-                                                                    color: AppColors.white,
-                                                                    fontSize: 11,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                      const SizedBox(height: 2),
-                                                      if (form?.wdlIndicators != null)
-                                                        form?.wdlIndicators == ''
-                                                            ? const SizedBox()
-                                                            : Container(
-                                                                height: 2.5,
-                                                                width: 15.5,
-                                                                decoration: BoxDecoration(
-                                                                    color: form?.wdlIndicators?.toLowerCase() == 'd'
-                                                                        ? AppColors.grey
-                                                                        : form?.wdlIndicators?.toLowerCase() == 'w'
-                                                                            ? AppColors.green
-                                                                            : AppColors.red,
-                                                                    borderRadius: BorderRadius.circular(100)),
-                                                              ),
-                                                    ],
+                                                Row(
+                                                  children: List.generate(
+                                                    tempList.length,
+                                                    (indexTemp) => Transform(
+                                                      transform: Matrix4.translationValues(
+                                                          SizeUtils.horizontalBlockSize * 1,
+                                                          SizeUtils.horizontalBlockSize * 4,
+                                                          0),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                        child: Column(
+                                                          children: [
+                                                            if (form?.wdlIndicators != null)
+                                                              form?.wdlIndicators == ''
+                                                                  ? const SizedBox()
+                                                                  : Container(
+                                                                      decoration: BoxDecoration(
+                                                                        borderRadius: BorderRadius.circular(4),
+                                                                        color: tempList[indexTemp].toLowerCase() == 'd'
+                                                                            ? AppColors.grey
+                                                                            : tempList[indexTemp].toLowerCase() == 'w'
+                                                                                ? AppColors.green
+                                                                                : AppColors.black,
+                                                                      ),
+                                                                      child: Padding(
+                                                                        padding:
+                                                                            tempList[indexTemp].toLowerCase() == 'd'
+                                                                                ? const EdgeInsets.symmetric(
+                                                                                    horizontal: 4, vertical: 2)
+                                                                                : const EdgeInsets.symmetric(
+                                                                                    horizontal: 3, vertical: 2),
+                                                                        child: AppText(
+                                                                          // text: form?.wdlIndicators?.toLowerCase() == 'l'
+                                                                          //     ? ' L '
+                                                                          //     : form?.wdlIndicators ?? "",
+                                                                          text: tempList[indexTemp].toLowerCase() == 'l'
+                                                                              ? ' L '
+                                                                              : tempList[indexTemp],
+                                                                          color: AppColors.white,
+                                                                          fontSize: 12,
+                                                                          fontWeight: FontWeight.w500,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                            const SizedBox(height: 2),
+                                                            if (form?.wdlIndicators != null)
+                                                              form?.wdlIndicators == ''
+                                                                  ? const SizedBox()
+                                                                  : indexTemp == lastIndex
+                                                                      ? Container(
+                                                                          height: 2.5,
+                                                                          width: 15.5,
+                                                                          decoration: BoxDecoration(
+                                                                              color: tempList[indexTemp]
+                                                                                          .toLowerCase() ==
+                                                                                      'd'
+                                                                                  ? AppColors.grey
+                                                                                  : tempList[indexTemp].toLowerCase() ==
+                                                                                          'w'
+                                                                                      ? AppColors.green
+                                                                                      : AppColors.black,
+                                                                              borderRadius: BorderRadius.circular(100)),
+                                                                        )
+                                                                      : const SizedBox(),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                                 SizedBox(width: SizeUtils.horizontalBlockSize * 5),

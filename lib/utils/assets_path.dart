@@ -3,15 +3,14 @@ class AssetsPath {
 
   /// Font Family
   static const String iBMPlexSans = 'IBMPlexSans';
+/// background
+  ///
+  static const String _baseBackgroundPath = 'assets/background/';
+  static const String scoreBackground = _baseBackgroundPath + 'score_background.png';
 
   /// Icons
-  static const String _baseBackGroundPath = 'assets/background/';
-  static const String backgroundImageSliverAppBar = _baseBackGroundPath + "background_image_sliver_appbar.png";
-  static const String boll = _baseBackGroundPath + "boll.png";
-  static const String menu = _baseBackGroundPath + "menu_dashbord.svg";
-  /// Icons
   static const String _baseIconPath = 'assets/icon/';
-  static const String appLogo = _baseIconPath + 'applogo.jpg';
+  static const String appLogo = _baseIconPath + 'applogo.png';
   static const String search = _baseIconPath + 'search.png';
   static const String calendar = _baseIconPath + 'calendar.png';
   static const String leftArrowForward = _baseIconPath + 'left_forward.png';
@@ -28,8 +27,8 @@ class AssetsPath {
   static const String leftCalenderIcon = _baseIconPath + 'Left.png';
   static const String rightCalenderIcon = _baseIconPath + 'Right.png';
   static const String footBallField = _baseIconPath + 'football_field.png';
+  static const String ground = _baseIconPath + 'ground.png';
   static const String football = _baseIconPath + 'football.png';
-
   /// Image
   static const String _baseImagePath = 'assets/image/';
   static const String footBallCard = _baseImagePath + 'highlight_icon_goal.png';
@@ -49,6 +48,12 @@ class AssetsPath {
   static const String newsImage = _baseImagePath + 'news.jpg';
   static const String profile = _baseImagePath + 'profile.jpeg';
   static const String world_cup = _baseImagePath + 'world_cup.png';
+  static const String varImage = _baseImagePath + 'var.png';
+  static const String Privacy = _baseImagePath + 'Privacy.png';
+  static const String notification = _baseImagePath + 'notification.png';
+  static const String upgrade = _baseImagePath + 'upgrade.png';
+  static const String invite = _baseImagePath + 'invite.png';
+  static const String star = _baseImagePath + 'star.png';
 
   ///flags
   static const String arg = _baseIconPath + 'ARG.png';

@@ -106,10 +106,10 @@ class _TableScreenState extends State<TableScreen> {
                                                     borderRadius: BorderRadius.circular(15)),
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.only(left: 10, right: 10, top: 6, bottom: 6),
+                                                      const EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 3),
                                                   child: AppText(
                                                     text: rankingController.tableType[index],
-                                                    fontSize: SizeUtils.fSize_14(),
+                                                    fontSize: SizeUtils.fSize_13(),
                                                     fontWeight: FontWeight.w500,
                                                     color: rankingController.isSelectedType.value == index
                                                         ? AppColors.green[100]
@@ -252,7 +252,7 @@ class _TableScreenState extends State<TableScreen> {
                     ),
                     child: Container(
                       decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColors.white, boxShadow: [
+                          BoxDecoration(borderRadius: BorderRadius.circular(9), color: AppColors.white, boxShadow: [
                         BoxShadow(color: AppColors.grey[90]!, blurRadius: 2),
                       ]),
                       child: Column(
@@ -276,7 +276,7 @@ class _TableScreenState extends State<TableScreen> {
                                   child: Text(
                                     'Pl',
                                     style:
-                                        TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                        TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                   ),
                                 ),
                                 Expanded(
@@ -284,7 +284,7 @@ class _TableScreenState extends State<TableScreen> {
                                   child: Text(
                                     'GD',
                                     style:
-                                        TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                        TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                   ),
                                 ),
                                 Expanded(
@@ -292,7 +292,7 @@ class _TableScreenState extends State<TableScreen> {
                                   child: Text(
                                     'Pts',
                                     style:
-                                        TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                        TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                   ),
                                 ),
                                 SizedBox(
@@ -309,114 +309,134 @@ class _TableScreenState extends State<TableScreen> {
                             children: List.generate(
                               rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?.length ?? 0,
                               (index1) => Padding(
-                                padding: const EdgeInsets.only(bottom: 8),
-                                child: Row(
-                                  children: [
-                                    index1 == 0 || index1 == 1
-                                        ? Container(
-                                            width: 2.5,
-                                            height: SizeUtils.verticalBlockSize * 6,
-                                            decoration: BoxDecoration(
-                                                borderRadius: const BorderRadius.only(
-                                                    topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
-                                                color: AppColors.green[200]),
-                                          )
-                                        : const SizedBox(width: 2.5),
-                                    Expanded(
-                                      child: Container(
-                                        height: SizeUtils.verticalBlockSize * 6,
-                                        color: arg.teamNameOne ==
-                                                    rankingController.rankingTableModel.value.root?.table
-                                                        ?.subt?[teamIndex].t?[index1].name ||
-                                                arg.teamNameTwo ==
-                                                    rankingController.rankingTableModel.value.root?.table
-                                                        ?.subt?[teamIndex].t?[index1].name
-                                            ? AppColors.black.withOpacity(0.1)
-                                            : AppColors.white,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 8,
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: SizeUtils.horizontalBlockSize * 3,
-                                                  ),
-                                                  Text(
-                                                    '${index1 + 1}',
-                                                    style: const TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight: FontWeight.w500,
-                                                        fontSize: 14),
-                                                  ),
-                                                  SizedBox(
-                                                    width: SizeUtils.horizontalBlockSize * 2.8,
-                                                  ),
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(200),
-                                                    child: Image.asset(
-                                                      homeController.imageTeamOneType(subt?.t?[index1].name),
-                                                      fit: BoxFit.cover,
-                                                      height: 20,
-                                                      width: 20,
-                                                      // scale: 40,
+                                padding: const EdgeInsets.only(bottom: 6),
+                                child: Container(
+                                  color: arg.teamNameOne ==
+                                              rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex]
+                                                  .t?[index1].name ||
+                                          arg.teamNameTwo ==
+                                              rankingController
+                                                  .rankingTableModel.value.root?.table?.subt?[teamIndex].t?[index1].name
+                                      ? AppColors.black.withOpacity(0.04)
+                                      : AppColors.white,
+                                  child: Row(
+                                    children: [
+                                      index1 == 0 || index1 == 1
+                                          ? Container(
+                                              width: 2.5,
+                                              height: SizeUtils.verticalBlockSize * 6.5,
+                                              decoration: BoxDecoration(
+                                                  borderRadius: const BorderRadius.only(
+                                                      topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
+                                                  color: AppColors.green[200]),
+                                            )
+                                          : const SizedBox(width: 2.5),
+                                      Expanded(
+                                        child: Container(
+                                          height: SizeUtils.verticalBlockSize * 6.5,
+                                          // color: arg.teamNameOne ==
+                                          //             rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?[index1].name ||
+                                          //         arg.teamNameTwo ==
+                                          //             rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?[index1].name
+                                          //     ? AppColors.black.withOpacity(0.1)
+                                          //     : AppColors.white,
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 8,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: SizeUtils.horizontalBlockSize * 3,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: SizeUtils.horizontalBlockSize * 2.8,
-                                                  ),
-                                                  Text(
-                                                    rankingController.rankingTableModel.value.root?.table
-                                                            ?.subt?[teamIndex].t?[index1].name ??
-                                                        '',
-                                                    style: const TextStyle(
-                                                        color: AppColors.black,
-                                                        fontWeight: FontWeight.w400,
-                                                        fontSize: 14),
-                                                  ),
-                                                ],
+                                                    index1 == 0
+                                                        ? AppText(
+                                                            text: ' ${index1 + 1}',
+                                                            textAlign: TextAlign.end,
+                                                            color: AppColors.black,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontSize: 14)
+                                                        : AppText(
+                                                            text: '${index1 + 1}',
+                                                            textAlign: TextAlign.end,
+                                                            color: AppColors.black,
+                                                            fontWeight: FontWeight.w500,
+                                                            fontSize: 14),
+                                                    SizedBox(
+                                                      width: SizeUtils.horizontalBlockSize * 2.8,
+                                                    ),
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(200),
+                                                      child: Image.asset(
+                                                        homeController.imageTeamOneType(subt?.t?[index1].name),
+                                                        fit: BoxFit.cover,
+                                                        height: 20,
+                                                        width: 20,
+                                                        // scale: 40,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: SizeUtils.horizontalBlockSize * 2.8,
+                                                    ),
+                                                    Text(
+                                                      rankingController.rankingTableModel.value.root?.table
+                                                              ?.subt?[teamIndex].t?[index1].name ??
+                                                          '',
+                                                      style: const TextStyle(
+                                                          color: AppColors.black,
+                                                          fontWeight: FontWeight.w400,
+                                                          fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                ' ${(int.parse(subt?.t?[index1].w ?? '0')) + (int.parse(subt?.t?[index1].d ?? '0')) + (int.parse(subt?.t?[index1].l ?? '0'))}',
-                                                style: const TextStyle(
-                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  ' ${(int.parse(subt?.t?[index1].w ?? '0')) + (int.parse(subt?.t?[index1].d ?? '0')) + (int.parse(subt?.t?[index1].l ?? '0'))}',
+                                                  style: const TextStyle(
+                                                      color: AppColors.black,
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 13),
+                                                ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                (int.parse(subt?.t?[index1].g ?? '0')) -
-                                                            (int.parse(subt?.t?[index1].hc ?? '0')) >
-                                                        0
-                                                    ? '+${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}'
-                                                    : (int.parse(subt?.t?[index1].g ?? '0')) -
-                                                                (int.parse(subt?.t?[index1].hc ?? '0')) ==
-                                                            0
-                                                        ? '  0'
-                                                        : '${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}',
-                                                style: const TextStyle(
-                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  (int.parse(subt?.t?[index1].g ?? '0')) -
+                                                              (int.parse(subt?.t?[index1].hc ?? '0')) >
+                                                          0
+                                                      ? '+${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}'
+                                                      : (int.parse(subt?.t?[index1].g ?? '0')) -
+                                                                  (int.parse(subt?.t?[index1].hc ?? '0')) ==
+                                                              0
+                                                          ? '  0'
+                                                          : '${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}',
+                                                  style: const TextStyle(
+                                                      color: AppColors.black,
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 13),
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(width: SizeUtils.horizontalBlockSize * 1),
-                                            Expanded(
-                                              flex: 1,
-                                              child: Text(
-                                                rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex]
-                                                        .t?[index1].p ??
-                                                    '',
-                                                style: const TextStyle(
-                                                    color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 13),
+                                              SizedBox(width: SizeUtils.horizontalBlockSize * 1),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Text(
+                                                  rankingController.rankingTableModel.value.root?.table
+                                                          ?.subt?[teamIndex].t?[index1].p ??
+                                                      '',
+                                                  style: const TextStyle(
+                                                      color: AppColors.black,
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 13),
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -464,7 +484,7 @@ class _TableScreenState extends State<TableScreen> {
                   ),
                   child: Container(
                     decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColors.white, boxShadow: [
+                        BoxDecoration(borderRadius: BorderRadius.circular(9), color: AppColors.white, boxShadow: [
                       BoxShadow(color: AppColors.grey[90]!, blurRadius: 2),
                     ]),
                     child: Column(
@@ -489,7 +509,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'Pl',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                 ),
                               ),
                               Expanded(
@@ -498,7 +518,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'W',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                 ),
                               ),
                               Expanded(
@@ -507,7 +527,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'D',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                 ),
                               ),
                               Expanded(
@@ -516,7 +536,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'L',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                 ),
                               ),
                               Expanded(
@@ -525,7 +545,7 @@ class _TableScreenState extends State<TableScreen> {
                                   '+/-',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 12.5),
                                 ),
                               ),
                               SizedBox(width: SizeUtils.horizontalBlockSize * 2),
@@ -535,7 +555,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'GD',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                 ),
                               ),
                               Expanded(
@@ -544,7 +564,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'Pts',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w400, fontSize: 14),
                                 ),
                               ),
                               SizedBox(
@@ -561,165 +581,181 @@ class _TableScreenState extends State<TableScreen> {
                           children: List.generate(
                             rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?.length ?? 0,
                             (index1) => Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Row(
-                                children: [
-                                  index1 == 0 || index1 == 1
-                                      ? Container(
-                                          width: 2.5,
-                                          height: SizeUtils.verticalBlockSize * 6,
-                                          decoration: BoxDecoration(
-                                              borderRadius: const BorderRadius.only(
-                                                  topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
-                                              color: AppColors.green[200]),
-                                        )
-                                      : const SizedBox(width: 2.5),
-                                  Expanded(
-                                    child: Container(
-                                      height: SizeUtils.verticalBlockSize * 6,
-                                      color: arg.teamNameOne ==
-                                                  rankingController.rankingTableModel.value.root?.table
-                                                      ?.subt?[teamIndex].t?[index1].name ||
-                                              arg.teamNameTwo ==
-                                                  rankingController.rankingTableModel.value.root?.table
-                                                      ?.subt?[teamIndex].t?[index1].name
-                                          ? AppColors.black.withOpacity(0.1)
-                                          : AppColors.white,
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 7,
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: SizeUtils.horizontalBlockSize * 3,
-                                                ),
-                                                Text(
-                                                  '${index1 + 1}',
-                                                  style: const TextStyle(
-                                                      color: AppColors.black,
-                                                      fontWeight: FontWeight.w500,
-                                                      fontSize: 14),
-                                                ),
-                                                SizedBox(
-                                                  width: SizeUtils.horizontalBlockSize * 2.8,
-                                                ),
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(200),
-                                                  child: Image.asset(
-                                                    homeController.imageTeamOneType(subt?.t?[index1].name),
-                                                    fit: BoxFit.cover,
-                                                    height: 20,
-                                                    width: 20,
-                                                    // scale: 40,
+                              padding: const EdgeInsets.only(bottom: 6),
+                              child: Container(
+                                color: arg.teamNameOne ==
+                                            rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex]
+                                                .t?[index1].name ||
+                                        arg.teamNameTwo ==
+                                            rankingController
+                                                .rankingTableModel.value.root?.table?.subt?[teamIndex].t?[index1].name
+                                    ? AppColors.black.withOpacity(0.04)
+                                    : AppColors.white,
+                                child: Row(
+                                  children: [
+                                    index1 == 0 || index1 == 1
+                                        ? Container(
+                                            width: 2.5,
+                                            height: SizeUtils.verticalBlockSize * 6.5,
+                                            decoration: BoxDecoration(
+                                                borderRadius: const BorderRadius.only(
+                                                    topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
+                                                color: AppColors.green[200]),
+                                          )
+                                        : const SizedBox(width: 2.5),
+                                    Expanded(
+                                      child: Container(
+                                        height: SizeUtils.verticalBlockSize * 6.5,
+                                        // color: arg.teamNameOne ==
+                                        //             rankingController.rankingTableModel.value.root?.table
+                                        //                 ?.subt?[teamIndex].t?[index1].name ||
+                                        //         arg.teamNameTwo ==
+                                        //             rankingController.rankingTableModel.value.root?.table
+                                        //                 ?.subt?[teamIndex].t?[index1].name
+                                        //     ? AppColors.black.withOpacity(0.1)
+                                        //     : AppColors.white,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 7,
+                                              child: Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: SizeUtils.horizontalBlockSize * 3,
                                                   ),
-                                                ),
-                                                // SizedBox(
-                                                //   height: 20,
-                                                //   width: 30,
-                                                //   child: Image.asset(
-                                                //     homeController.imageTeamOneType(subt?.t?[index1].name),
-                                                //     fit: BoxFit.fill,
-                                                //     // scale: 40,
-                                                //   ),
-                                                // ),
-                                                SizedBox(
-                                                  width: SizeUtils.horizontalBlockSize * 2.8,
-                                                ),
-                                                Text(
-                                                  subt?.t?[index1].name ?? '',
-                                                  // textAlign: TextAlign.center,
-                                                  style: const TextStyle(
-                                                      color: AppColors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 14),
-                                                ),
-                                              ],
+                                                  index1 == 0
+                                                      ? AppText(
+                                                          text: ' ${index1 + 1}',
+                                                          textAlign: TextAlign.end,
+                                                          color: AppColors.black,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontSize: 14)
+                                                      : AppText(
+                                                          text: '${index1 + 1}',
+                                                          textAlign: TextAlign.end,
+                                                          color: AppColors.black,
+                                                          fontWeight: FontWeight.w500,
+                                                          fontSize: 14),
+                                                  SizedBox(
+                                                    width: SizeUtils.horizontalBlockSize * 2.8,
+                                                  ),
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(200),
+                                                    child: Image.asset(
+                                                      homeController.imageTeamOneType(subt?.t?[index1].name),
+                                                      fit: BoxFit.cover,
+                                                      height: 20,
+                                                      width: 20,
+                                                      // scale: 40,
+                                                    ),
+                                                  ),
+                                                  // SizedBox(
+                                                  //   height: 20,
+                                                  //   width: 30,
+                                                  //   child: Image.asset(
+                                                  //     homeController.imageTeamOneType(subt?.t?[index1].name),
+                                                  //     fit: BoxFit.fill,
+                                                  //     // scale: 40,
+                                                  //   ),
+                                                  // ),
+                                                  SizedBox(
+                                                    width: SizeUtils.horizontalBlockSize * 2.8,
+                                                  ),
+                                                  Text(
+                                                    subt?.t?[index1].name ?? '',
+                                                    // textAlign: TextAlign.center,
+                                                    style: const TextStyle(
+                                                        color: AppColors.black,
+                                                        fontWeight: FontWeight.w400,
+                                                        fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              '${(int.parse(subt?.t?[index1].w ?? '0')) + (int.parse(subt?.t?[index1].d ?? '0')) + (int.parse(subt?.t?[index1].l ?? '0'))}',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                '${(int.parse(subt?.t?[index1].w ?? '0')) + (int.parse(subt?.t?[index1].d ?? '0')) + (int.parse(subt?.t?[index1].l ?? '0'))}',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              subt?.t?[index1].w ?? '',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                subt?.t?[index1].w ?? '',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              subt?.t?[index1].d ?? '',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                subt?.t?[index1].d ?? '',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              ),
                                             ),
-                                          ),
 
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              subt?.t?[index1].l ?? '',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                subt?.t?[index1].l ?? '',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              ),
                                             ),
-                                          ),
-                                          // SizedBox(width: SizeUtils.horizontalBlockSize * 1.5),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              '${subt?.t?[index1].g}-${subt?.t?[index1].hc}',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                            // SizedBox(width: SizeUtils.horizontalBlockSize * 1.5),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                '${subt?.t?[index1].g}-${subt?.t?[index1].hc}',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 12),
+                                              ),
                                             ),
-                                          ),
 
-                                          SizedBox(width: SizeUtils.horizontalBlockSize * 2),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              (int.parse(subt?.t?[index1].g ?? '0')) -
-                                                          (int.parse(subt?.t?[index1].hc ?? '0')) >
-                                                      0
-                                                  ? ' +${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}'
-                                                  : (int.parse(subt?.t?[index1].g ?? '0')) -
-                                                              (int.parse(subt?.t?[index1].hc ?? '0')) ==
-                                                          0
-                                                      ? '   0'
-                                                      : ' ${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                            SizedBox(width: SizeUtils.horizontalBlockSize * 2),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                (int.parse(subt?.t?[index1].g ?? '0')) -
+                                                            (int.parse(subt?.t?[index1].hc ?? '0')) >
+                                                        0
+                                                    ? ' +${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}'
+                                                    : (int.parse(subt?.t?[index1].g ?? '0')) -
+                                                                (int.parse(subt?.t?[index1].hc ?? '0')) ==
+                                                            0
+                                                        ? '   0'
+                                                        : ' ${(int.parse(subt?.t?[index1].g ?? '0')) - (int.parse(subt?.t?[index1].hc ?? '0'))}',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w400, fontSize: 13),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: SizeUtils.horizontalBlockSize * 3,
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Text(
-                                              subt?.t?[index1].p ?? '',
-                                              // textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 13),
+                                            SizedBox(
+                                              width: SizeUtils.horizontalBlockSize * 3,
                                             ),
-                                          ),
-                                        ],
+                                            Expanded(
+                                              flex: 1,
+                                              child: Text(
+                                                subt?.t?[index1].p ?? '',
+                                                // textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: AppColors.black, fontWeight: FontWeight.w500, fontSize: 13),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -770,7 +806,7 @@ class _TableScreenState extends State<TableScreen> {
                   ),
                   child: Container(
                     decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(15), color: AppColors.white, boxShadow: [
+                        BoxDecoration(borderRadius: BorderRadius.circular(9), color: AppColors.white, boxShadow: [
                       BoxShadow(color: AppColors.grey[90]!, blurRadius: 2),
                     ]),
                     child: Column(
@@ -795,7 +831,7 @@ class _TableScreenState extends State<TableScreen> {
                                   'Last 5 matches',
                                   // textAlign: TextAlign.center,
                                   style:
-                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 14),
+                                      TextStyle(color: AppColors.grey[70], fontWeight: FontWeight.w500, fontSize: 12),
                                 ),
                               ),
                               SizedBox(
@@ -817,7 +853,6 @@ class _TableScreenState extends State<TableScreen> {
                                 formModel.Form? form;
                                 try {
                                   if (rankingController.formModel.value.teamForm?.length != null) {
-                                    print("teamForm===>${teamForm}");
                                     teamForm = rankingController.formModel.value.teamForm?.firstWhere(
                                         (element) => subt?.t?[index1].id == element.teamId.toString(),
                                         orElse: () => TeamForm());
@@ -830,131 +865,178 @@ class _TableScreenState extends State<TableScreen> {
                                 } catch (e, st) {
                                   print("error==>$e $st");
                                 }
+                                List tempList = [];
+                                for (int i = 0; i < form!.wdlIndicators!.length; i++) {
+                                  tempList.add(form.wdlIndicators.toString().substring(i, i + 1));
+                                }
+                                int lastIndex = tempList.length == 0 ? 0 : tempList.length - 1;
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: 8),
-                                  child: Row(
-                                    children: [
-                                      index1 == 0 || index1 == 1
-                                          ? Container(
-                                              width: 2.5,
-                                              height: SizeUtils.verticalBlockSize * 6,
-                                              decoration: BoxDecoration(
-                                                  borderRadius: const BorderRadius.only(
-                                                      topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
-                                                  color: AppColors.green[200]),
-                                            )
-                                          : const SizedBox(width: 2.5),
-                                      Expanded(
-                                        child: Container(
-                                          height: SizeUtils.verticalBlockSize * 6,
-                                          color: arg.teamNameOne ==
-                                                      rankingController.rankingTableModel.value.root?.table
-                                                          ?.subt?[teamIndex].t?[index1].name ||
-                                                  arg.teamNameTwo ==
-                                                      rankingController.rankingTableModel.value.root?.table
-                                                          ?.subt?[teamIndex].t?[index1].name
-                                              ? AppColors.black.withOpacity(0.1)
-                                              : AppColors.white,
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 7,
-                                                child: Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: SizeUtils.horizontalBlockSize * 3,
-                                                    ),
-                                                    Text(
-                                                      '${index1 + 1}',
-                                                      style: const TextStyle(
-                                                          color: AppColors.black,
-                                                          fontWeight: FontWeight.w500,
-                                                          fontSize: 14),
-                                                    ),
-                                                    SizedBox(
-                                                      width: SizeUtils.horizontalBlockSize * 2.8,
-                                                    ),
-                                                    ClipRRect(
-                                                      borderRadius: BorderRadius.circular(200),
-                                                      child: Image.asset(
-                                                        homeController.imageTeamOneType(subt?.t?[index1].name),
-                                                        fit: BoxFit.cover,
-                                                        height: 20,
-                                                        width: 20,
-                                                        // scale: 40,
+                                  padding: const EdgeInsets.only(bottom: 6),
+                                  child: Container(
+                                    color: arg.teamNameOne ==
+                                                rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex]
+                                                    .t?[index1].name ||
+                                            arg.teamNameTwo ==
+                                                rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex]
+                                                    .t?[index1].name
+                                        ? AppColors.black.withOpacity(0.04)
+                                        : AppColors.white,
+                                    child: Row(
+                                      children: [
+                                        index1 == 0 || index1 == 1
+                                            ? Container(
+                                                width: 2.5,
+                                                height: SizeUtils.verticalBlockSize * 6.5,
+                                                decoration: BoxDecoration(
+                                                    borderRadius: const BorderRadius.only(
+                                                        topRight: Radius.circular(4), bottomRight: Radius.circular(4)),
+                                                    color: AppColors.green[200]),
+                                              )
+                                            : const SizedBox(width: 2.5),
+                                        Expanded(
+                                          child: Container(
+                                            height: SizeUtils.verticalBlockSize * 6.5,
+                                            // color: arg.teamNameOne ==
+                                            //             rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?[index1].name ||
+                                            //         arg.teamNameTwo ==
+                                            //             rankingController.rankingTableModel.value.root?.table?.subt?[teamIndex].t?[index1].name
+                                            //     ? AppColors.black.withOpacity(0.1)
+                                            //     : AppColors.white,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 7,
+                                                  child: Row(
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: SizeUtils.horizontalBlockSize * 3,
                                                       ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: SizeUtils.horizontalBlockSize * 2.8,
-                                                    ),
-                                                    Text(
-                                                      subt?.t?[index1].name ?? '',
-                                                      // textAlign: TextAlign.center,
-                                                      style: const TextStyle(
-                                                          color: AppColors.black,
-                                                          fontWeight: FontWeight.w400,
-                                                          fontSize: 14),
-                                                    ),
-                                                    const Spacer(),
-                                                    Transform(
-                                                      transform: Matrix4.translationValues(0, 16, 0),
-                                                      child: Column(
-                                                        children: [
-                                                          if (form?.wdlIndicators != null)
-                                                            form?.wdlIndicators == ''
-                                                                ? const SizedBox()
-                                                                : Container(
-                                                                    decoration: BoxDecoration(
-                                                                      borderRadius: BorderRadius.circular(4),
-                                                                      color: form?.wdlIndicators?.toLowerCase() == 'd'
-                                                                          ? AppColors.grey
-                                                                          : form?.wdlIndicators?.toLowerCase() == 'w'
-                                                                              ? AppColors.green
-                                                                              : AppColors.red,
-                                                                    ),
-                                                                    child: Padding(
-                                                                      padding: form?.wdlIndicators?.toLowerCase() == 'd'
-                                                                          ? const EdgeInsets.symmetric(
-                                                                              horizontal: 4, vertical: 2)
-                                                                          : const EdgeInsets.symmetric(
-                                                                              horizontal: 3, vertical: 2),
-                                                                      child: AppText(
-                                                                        text: form?.wdlIndicators?.toLowerCase() == 'l'
-                                                                            ? ' L '
-                                                                            : form?.wdlIndicators ?? "",
-                                                                        color: AppColors.white,
-                                                                        fontSize: 11,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                          const SizedBox(height: 2),
-                                                          if (form?.wdlIndicators != null)
-                                                            form?.wdlIndicators == ''
-                                                                ? const SizedBox()
-                                                                : Container(
-                                                                    height: 2.5,
-                                                                    width: 15.5,
-                                                                    decoration: BoxDecoration(
-                                                                        color: form?.wdlIndicators?.toLowerCase() == 'd'
-                                                                            ? AppColors.grey
-                                                                            : form?.wdlIndicators?.toLowerCase() == 'w'
-                                                                                ? AppColors.green
-                                                                                : AppColors.red,
-                                                                        borderRadius: BorderRadius.circular(100)),
-                                                                  ),
-                                                        ],
+                                                      index1 == 0
+                                                          ? AppText(
+                                                              text: ' ${index1 + 1}',
+                                                              textAlign: TextAlign.end,
+                                                              color: AppColors.black,
+                                                              fontWeight: FontWeight.w500,
+                                                              fontSize: 14)
+                                                          : AppText(
+                                                              text: '${index1 + 1}',
+                                                              textAlign: TextAlign.end,
+                                                              color: AppColors.black,
+                                                              fontWeight: FontWeight.w500,
+                                                              fontSize: 14),
+                                                      SizedBox(
+                                                        width: SizeUtils.horizontalBlockSize * 2.8,
                                                       ),
-                                                    ),
-                                                    SizedBox(width: SizeUtils.horizontalBlockSize * 5),
-                                                  ],
+                                                      ClipRRect(
+                                                        borderRadius: BorderRadius.circular(200),
+                                                        child: Image.asset(
+                                                          homeController.imageTeamOneType(subt?.t?[index1].name),
+                                                          fit: BoxFit.cover,
+                                                          height: 20,
+                                                          width: 20,
+                                                          // scale: 40,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: SizeUtils.horizontalBlockSize * 2.8,
+                                                      ),
+                                                      Text(
+                                                        subt?.t?[index1].name ?? '',
+                                                        // textAlign: TextAlign.center,
+                                                        style: const TextStyle(
+                                                            color: AppColors.black,
+                                                            fontWeight: FontWeight.w400,
+                                                            fontSize: 14),
+                                                      ),
+                                                      const Spacer(),
+                                                      Row(
+                                                        children: List.generate(
+                                                          tempList.length,
+                                                          (indexTemp) => Transform(
+                                                            transform: Matrix4.translationValues(
+                                                                SizeUtils.horizontalBlockSize * 1,
+                                                                SizeUtils.horizontalBlockSize * 2,
+                                                                0),
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                              child: Column(
+                                                                children: [
+                                                                  if (form?.wdlIndicators != null)
+                                                                    form?.wdlIndicators == ''
+                                                                        ? const SizedBox()
+                                                                        : Container(
+                                                                            decoration: BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(4),
+                                                                              color: tempList[indexTemp]
+                                                                                          .toLowerCase() ==
+                                                                                      'd'
+                                                                                  ? AppColors.grey
+                                                                                  : tempList[indexTemp].toLowerCase() ==
+                                                                                          'w'
+                                                                                      ? AppColors.green
+                                                                                      : AppColors.black,
+                                                                            ),
+                                                                            child: Padding(
+                                                                              padding:
+                                                                                  tempList[indexTemp].toLowerCase() ==
+                                                                                          'd'
+                                                                                      ? const EdgeInsets.symmetric(
+                                                                                          horizontal: 4, vertical: 2)
+                                                                                      : const EdgeInsets.symmetric(
+                                                                                          horizontal: 3, vertical: 2),
+                                                                              child: AppText(
+                                                                                // text: form?.wdlIndicators?.toLowerCase() == 'l'
+                                                                                //     ? ' L '
+                                                                                //     : form?.wdlIndicators ?? "",
+                                                                                text:
+                                                                                    tempList[indexTemp].toLowerCase() ==
+                                                                                            'l'
+                                                                                        ? ' L '
+                                                                                        : tempList[indexTemp],
+                                                                                color: AppColors.white,
+                                                                                fontSize: 11,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                  const SizedBox(height: 2),
+                                                                  if (form?.wdlIndicators != null)
+                                                                    form?.wdlIndicators == ''
+                                                                        ? const SizedBox()
+                                                                        : indexTemp == lastIndex
+                                                                            ? Container(
+                                                                                height: 2.5,
+                                                                                width: 15.5,
+                                                                                decoration: BoxDecoration(
+                                                                                    color: tempList[indexTemp]
+                                                                                                .toLowerCase() ==
+                                                                                            'd'
+                                                                                        ? AppColors.grey
+                                                                                        : tempList[indexTemp]
+                                                                                                    .toLowerCase() ==
+                                                                                                'w'
+                                                                                            ? AppColors.green
+                                                                                            : AppColors.black,
+                                                                                    borderRadius:
+                                                                                        BorderRadius.circular(100)),
+                                                                              )
+                                                                            : SizedBox(),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(width: SizeUtils.horizontalBlockSize * 5),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
                               },

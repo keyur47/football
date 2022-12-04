@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 class ShotmapModel {
   List<Shots>? shots;
 
@@ -48,27 +49,27 @@ class Shots {
 
   Shots(
       {this.id,
-        this.eventType,
-        this.teamId,
-        this.playerId,
-        this.playerName,
-        this.x,
-        this.y,
-        this.min,
-        this.minAdded,
-        this.isBlocked,
-        this.isOnTarget,
-        this.blockedX,
-        this.blockedY,
-        this.goalCrossedY,
-        this.goalCrossedZ,
-        this.expectedGoals,
-        this.expectedGoalsOnTarget,
-        this.shotType,
-        this.situation,
-        this.period,
-        this.isOwnGoal,
-        this.onGoalShot});
+      this.eventType,
+      this.teamId,
+      this.playerId,
+      this.playerName,
+      this.x,
+      this.y,
+      this.min,
+      this.minAdded,
+      this.isBlocked,
+      this.isOnTarget,
+      this.blockedX,
+      this.blockedY,
+      this.goalCrossedY,
+      this.goalCrossedZ,
+      this.expectedGoals,
+      this.expectedGoalsOnTarget,
+      this.shotType,
+      this.situation,
+      this.period,
+      this.isOwnGoal,
+      this.onGoalShot});
 
   Shots.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -89,12 +90,10 @@ class Shots {
     expectedGoals = json['expectedGoals'];
     expectedGoalsOnTarget = json['expectedGoalsOnTarget'];
     shotType = json['shotType'];
-    situation = json['situation'];
+    situation = json['situation'] ?? "";
     period = json['period'];
     isOwnGoal = json['isOwnGoal'];
-    onGoalShot = json['onGoalShot'] != null
-        ? OnGoalShot.fromJson(json['onGoalShot'])
-        : null;
+    onGoalShot = json['onGoalShot'] != null ? OnGoalShot.fromJson(json['onGoalShot']) : null;
   }
 
   Map<String, dynamic> toJson() {

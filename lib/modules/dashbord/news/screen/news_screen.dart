@@ -1,5 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:football/ads/interstitial_ad.dart';
+import 'package:football/helper/firebase_analyticsUtils.dart';
 import 'package:football/helper/loading_helper.dart';
 import 'package:football/modules/dashbord/news/controller/news_controller.dart';
+import 'package:football/modules/dashbord/news/screen/news_web_view.dart';
 import 'package:football/utils/app_colors.dart';
 import 'package:football/utils/assets_path.dart';
 import 'package:football/utils/navigation_utils/routes.dart';
@@ -11,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 
+
 class NewsScreen extends KFDrawerContent {
   @override
   _NewsScreenState createState() => _NewsScreenState();
@@ -18,6 +23,13 @@ class NewsScreen extends KFDrawerContent {
 
 class _NewsScreenState extends State<NewsScreen> {
   final NewsController newsController = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.newsScreen);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,29 +37,31 @@ class _NewsScreenState extends State<NewsScreen> {
       backgroundColor: AppColors.grey.withOpacity(0.1),
       appBar: CustomAppBar(
         automaticallyImplyLeading: false,
+        leadingWidth: SizeUtils.horizontalBlockSize * 8,
+        leading: Builder(
+          builder: (context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                top: SizeUtils.horizontalBlockSize * 0.4,
+                left: SizeUtils.horizontalBlockSize * 3,
+
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  size: SizeUtils.horizontalBlockSize * 5.5,
+                ),
+                onPressed: widget.onMenuPressed,
+              ),
+            );
+          },
+        ),
         title: AppText(
           text: StringsUtils.news,
           color: AppColors.white,
           fontWeight: FontWeight.w500,
+          fontSize: SizeUtils.fSize_18(),
         ),
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: Icon(
-              Icons.menu_rounded,
-              color: AppColors.white,
-            ),
-            onPressed: widget.onMenuPressed,
-          ),
-        ),
-        // action: [
-        //   IconButton(
-        //     icon: const Icon(
-        //       Icons.more_vert_sharp,
-        //       color: AppColors.white,
-        //     ),
-        //     onPressed: () {},
-        //   ),
-        // ],
       ),
       body: RefreshIndicator(
         color: Colors.black,
@@ -74,9 +88,14 @@ class _NewsScreenState extends State<NewsScreen> {
                     var data = newsController.newsData.value.hits?.hits?[index].source;
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(Routes.detailedNews, arguments: [
-                          {'index': index},
-                        ]);
+                        InterstitalAd.showInterstitialAd();
+                        data?.summary != null
+                            ? Get.toNamed(Routes.detailedNews, arguments: [
+                                {'index': index},
+                              ]) //newsWebViewScreen
+                            : Get.to(NewsWebView(), arguments: [
+                                {'index': index},
+                              ]);
                       },
                       child: newsBox(
                         image: data?.imageUrl,
@@ -114,6 +133,19 @@ class _NewsScreenState extends State<NewsScreen> {
                   topLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
                   topRight: Radius.circular(SizeUtils.horizontalBlockSize * 2),
                 ),
+                // child: CachedNetworkImage(
+                //   imageUrl: image ?? '',
+                //   placeholder: (context, url) => Image.asset(
+                //     AssetsPath.appLogo,
+                //     width: double.infinity,
+                //   ),
+                //   errorWidget: (context, url, error) => Image.asset(
+                //     AssetsPath.appLogo,
+                //     width: double.infinity,
+                //   ),
+                //   fit: BoxFit.cover,
+                //   width: double.infinity,
+                // ),
                 child: FadeInImage.assetNetwork(
                   // placeholderCacheHeight: 170,
                   placeholderCacheWidth: 400,
@@ -132,24 +164,23 @@ class _NewsScreenState extends State<NewsScreen> {
               child: AppText(
                 text: headingNews ?? '',
                 color: AppColors.black,
-                fontSize: SizeUtils.fSize_14(),
-                height: 1.5,
+                fontSize: SizeUtils.fSize_13_5(),
+                height: 1.7,
                 letterSpacing: 0.5,
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: SizeUtils.horizontalBlockSize * 4,
-                vertical: SizeUtils.horizontalBlockSize * 1,
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
                     AssetsPath.blackCircle,
-                    width: SizeUtils.horizontalBlockSize * 5,
+                    width: SizeUtils.horizontalBlockSize * 4,
                   ),
-                  const SizedBox(width: 5),
+                  // const SizedBox(width: 5),
                   // AppText(
                   //   text: '',
                   //   color: AppColors.grey,
@@ -169,8 +200,8 @@ class _NewsScreenState extends State<NewsScreen> {
                   const SizedBox(width: 7),
                   AppText(
                     text: time ?? '',
-                    color: AppColors.grey,
-                    fontSize: SizeUtils.fSize_12(),
+                    color: AppColors.grey.withOpacity(0.6),
+                    fontSize: SizeUtils.fSize_10(),
                     height: 1.5,
                     letterSpacing: 0.5,
                   ),
@@ -178,7 +209,7 @@ class _NewsScreenState extends State<NewsScreen> {
               ),
             ),
             SizedBox(
-              height: SizeUtils.horizontalBlockSize * 2,
+              height: SizeUtils.horizontalBlockSize * 3,
             )
           ],
         ),

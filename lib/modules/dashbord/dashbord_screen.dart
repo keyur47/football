@@ -1,5 +1,6 @@
+// import 'package:football/ads/open_ad.dart';
+// import 'package:football/helper/firebase_analyticsUtils.dart';
 // import 'package:football/modules/dashbord/home/screen/home_screen.dart';
-// import 'package:football/modules/dashbord/more/screen/more_screen.dart';
 // import 'package:football/modules/dashbord/news/screen/news_screen.dart';
 // import 'package:football/modules/dashbord/ranking/screen/ranking_screen.dart';
 // import 'package:football/utils/app_colors.dart';
@@ -15,6 +16,38 @@
 // }
 //
 // class _DashBordScreenState extends State<DashBordScreen> with WidgetsBindingObserver {
+//   bool isPaused = false;
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     FirebaseAnalyticsUtils.sendCurrentScreen(FirebaseAnalyticsUtils.dashboardScreen);
+//     WidgetsBinding.instance.addObserver(this);
+//   }
+//
+//   @override
+//   void dispose() {
+//     // TODO: implement dispose
+//     super.dispose();
+//     WidgetsBinding.instance.removeObserver(this);
+//   }
+//
+//   @override
+//   void didChangeAppLifecycleState(AppLifecycleState state) {
+//     // TODO: implement didChangeAppLifecycleState
+//
+//     super.didChangeAppLifecycleState(state);
+//     if (state == AppLifecycleState.paused) {
+//       isPaused = true;
+//       print("------AppLifecycleState---1-->$state");
+//     }
+//     if (state == AppLifecycleState.inactive && isPaused) {
+//       print("------AppLifecycleState---2->$state");
+//       AppOpenAdManager.showOpenAdIfAvailable();
+//       isPaused = false;
+//     }
+//   }
+//
 //   final widgetOptions = [
 //     HomeScreen(),
 //     NewsScreen(),
@@ -93,25 +126,13 @@
 //                 ),
 //                 label: StringsUtils.ranking,
 //               ),
-//               // BottomNavigationBarItem(
-//               //   icon: Padding(
-//               //     padding: EdgeInsets.only(
-//               //       bottom: SizeUtils.horizontalBlockSize * 1,
-//               //       top: SizeUtils.horizontalBlockSize * 0,
-//               //     ),
-//               //     child: Icon(
-//               //       Icons.more,
-//               //       size: SizeUtils.verticalBlockSize * 3.3,
-//               //     ),
-//               //   ),
-//               //   label: StringsUtils.more,
-//               // ),
 //             ],
 //           ),
 //         ),
 //       ),
-//       body: Center(
-//         child: widgetOptions.elementAt(StringsUtils.bottomIndex.value),
+//       body: IndexedStack(
+//         index: StringsUtils.bottomIndex.value,
+//         children: widgetOptions.map((e) => e).toList(),
 //       ),
 //     );
 //   }

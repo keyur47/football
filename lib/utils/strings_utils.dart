@@ -6,14 +6,15 @@ class StringsUtils {
   static const String emptyQuote = '';
   static ValueNotifier<int> bottomIndex = ValueNotifier(0);
 
-  static const String appName = 'FiFa';
+  static const String appName = 'Football Live Scores 2022';
   static const String ranking = 'Ranking';
   static const String home = 'Home';
+  static const String score = 'Score';
   static const String news = 'News';
   static const String live = 'Live';
   static const String setting = 'Setting';
   static const String more = 'More';
-  static const String worldCup = 'World Cup';
+  static const String worldCup = 'World Cup 2022';
   static const String international = 'International';
   static const String account = 'Account';
   static const String about = 'About';
@@ -127,4 +128,18 @@ class StringsUtils {
 
   ///
   static const String qualificationNextStage = 'Qualification next stage';
+
+
+  /// settings
+  static const documentTitle = 'Rate Us';
+  static const documentSubTile = 'Share with your friends and family';
+  static const notification = 'Notification';
+  static const autoReply = 'Message Response Stats';
+  static const upgrade = 'Upgrade App';
+  static const advance = 'Advance Settings';
+  static const Appearance = 'Appearance';
+  static const Notification = 'Notification';
+  static const Privacy = 'Privacy';
+  static const Help = 'Help';
+  static const InviteFriends = 'Invite your friends';
 }

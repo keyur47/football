@@ -1,3 +1,5 @@
+import 'package:football/ads/interstitial_ad.dart';
+import 'package:football/ads/open_ad.dart';
 import 'package:football/utils/navigation_utils/navigation.dart';
 import 'package:football/utils/navigation_utils/routes.dart';
 import 'package:get/get.dart';
@@ -6,8 +8,8 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    // AppOpenAdManager.loadAd();
-    // InterstitalAd.createInterstitialAd();
+    AppOpenAdManager.loadAd();
+    InterstitalAd.createInterstitialAd();
     await Future.delayed(
       const Duration(seconds: 1),
     );

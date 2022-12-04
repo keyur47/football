@@ -287,13 +287,16 @@ class _TeamStatsState extends State<TeamStats> {
                 Row(
                   children: [
                     Expanded(
+                      flex:
+                          _homeController.matchDetailsModel?.value.root?.detailedstats?.homeTeamStats?.possession ?? 0,
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
-                              bottomLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
-                            ),
-                            color: AppColors.red),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
+                            bottomLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
+                          ),
+                          color: AppColors.primaryColor,
+                        ),
                         child: Row(
                           children: [
                             const SizedBox(width: 10),
@@ -313,6 +316,8 @@ class _TeamStatsState extends State<TeamStats> {
                     ),
                     const SizedBox(width: 5),
                     Expanded(
+                      flex:
+                          _homeController.matchDetailsModel?.value.root?.detailedstats?.awayTeamStats?.possession ?? 0,
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
@@ -355,7 +360,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: AppColors.red.withOpacity(0.1)),
+                                color: AppColors.primaryColor.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -373,7 +378,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: Colors.blue.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -427,7 +432,7 @@ class _TeamStatsState extends State<TeamStats> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                          color: AppColors.red.withOpacity(0.1)),
+                          color: AppColors.primaryColor.withOpacity(0.1)),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                         child: AppText(
@@ -445,7 +450,7 @@ class _TeamStatsState extends State<TeamStats> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                          color: Colors.blue.withOpacity(0.1)),
+                          color: Colors.black.withOpacity(0.1)),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                         child: AppText(
@@ -467,11 +472,12 @@ class _TeamStatsState extends State<TeamStats> {
                           child: Container(
                             height: 100,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
-                                  bottomLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
-                                ),
-                                color: AppColors.red),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
+                                bottomLeft: Radius.circular(SizeUtils.horizontalBlockSize * 2),
+                              ),
+                              color: AppColors.primaryColor,
+                            ),
                             // child: Row(
                             //   children: [
                             //     const SizedBox(width: 10),
@@ -630,7 +636,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: AppColors.red.withOpacity(0.1)),
+                                color: AppColors.primaryColor.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -648,7 +654,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: Colors.blue.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -724,7 +730,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: AppColors.red.withOpacity(0.1)),
+                                color: AppColors.primaryColor.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -742,7 +748,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: Colors.blue.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -808,7 +814,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: AppColors.red.withOpacity(0.1)),
+                                color: AppColors.primaryColor.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -826,7 +832,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: Colors.blue.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -892,7 +898,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: AppColors.red.withOpacity(0.1)),
+                                color: AppColors.primaryColor.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -910,7 +916,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: Colors.blue.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -976,7 +982,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: AppColors.red.withOpacity(0.1)),
+                                color: AppColors.primaryColor.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(
@@ -994,7 +1000,7 @@ class _TeamStatsState extends State<TeamStats> {
                           Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(SizeUtils.horizontalBlockSize * 2),
-                                color: Colors.blue.withOpacity(0.1)),
+                                color: Colors.black.withOpacity(0.1)),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 7, bottom: 5, right: 7, top: 5),
                               child: AppText(

@@ -49,10 +49,23 @@ dependencies:
   html: ^0.15.0
   xml2json: ^5.3.5
   grouped_list: ^5.1.2
+  firebase_core: ^2.3.0
+  firebase_analytics: ^10.0.6
   scroll_to_index:
   scrollable_positioned_list: ^0.3.5
   flutter_countdown_timer: ^4.1.0
   flutter_svg: ^1.1.6
+  webview_flutter: ^3.0.4
+  google_mobile_ads: ^2.2.0
+  cached_network_image: ^3.2.3
+  firebase_messaging: ^14.0.4
+  flutter_local_notifications: ^9.7.0
+  rxdart: ^0.27.7
+  app_settings: ^4.1.5
+  in_app_review: ^2.0.4
+  permission_handler: ^10.0.0
+  flutter_share: ^2.0.0
+
   kf_drawer:
     path: ./package/custom_animated_drawer
 dev_dependencies:
@@ -70,7 +83,7 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/applogo.jpg"
+  image_path: "assets/icon/applogo.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

@@ -161,6 +161,10 @@ class SizeUtils {
     return horizontalBlockSize * 5.560; //20
   }
 
+  static fSize_19() {
+    return horizontalBlockSize * 5.278; //19
+  }
+
   static fSize_18() {
     return horizontalBlockSize * 5.0; //18
   }
@@ -181,6 +185,10 @@ class SizeUtils {
     return horizontalBlockSize * 3.900; //14
   }
 
+  static fSize_13_5() {
+    return horizontalBlockSize * 3.777; //13.5
+  }
+
   static fSize_11() {
     return horizontalBlockSize * 3.06; //11
   }
@@ -195,6 +203,10 @@ class SizeUtils {
 
   static fSize_10() {
     return horizontalBlockSize * 2.800; //10
+  }
+
+  static fSize_9() {
+    return horizontalBlockSize * 2.526; //9
   }
 
   static fSize_8() {

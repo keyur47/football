@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:football/modules/dashbord/home/model/at_model.dart';
 import 'package:football/modules/dashbord/home/model/detailes_stats_model.dart';
 import 'package:football/modules/dashbord/home/model/external_lineup_model.dart';
 import 'package:football/modules/dashbord/home/model/gd_2_model.dart';
@@ -98,7 +99,7 @@ class Root {
   final Lodds? lodds;
   final Captain? nw;
   final Captain? nw2;
-  final Captain? at;
+  final List<ATModel>? at;
   final DetailedStatsModel? detailedstats;
   final Captain? tw;
   final Captain? media;
@@ -143,7 +144,7 @@ class Root {
         lodds: json["lodds"] != null ? Lodds.fromJson(json["lodds"]) : null,
         nw: json["nw"] != null ? Captain.fromJson(json["nw"]) : null,
         nw2: json["nw2"] != null ? Captain.fromJson(json["nw2"]) : null,
-        at: json["at"] != null ? Captain.fromJson(json["at"]) : null,
+        at: json["at"] != null ? ATModel.fromList(json["at"]) : [],
         detailedstats: json["detailedstats"] != null ? DetailedStatsModel.fromJson(json["detailedstats"]) : null,
         tw: json["tw"] != null ? Captain.fromJson(json["tw"]) : null,
         media: json["media"] != null ? Captain.fromJson(json["media"]) : null,
@@ -185,7 +186,7 @@ class Root {
         "lodds": lodds?.toJson(),
         "nw": nw?.toJson(),
         "nw2": nw2?.toJson(),
-        "at": at?.toJson(),
+        "at": List<dynamic>.from(at!.map((x) => x.toJson())),
         "detailedstats": detailedstats?.toJson(),
         "tw": tw?.toJson(),
         "media": media?.toJson(),

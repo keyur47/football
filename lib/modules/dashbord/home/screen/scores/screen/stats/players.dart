@@ -138,8 +138,8 @@ class _PlayersState extends State<Players> {
                             //       // scale: 9,
                             //     )),
                             Container(
-                              height: 28,
-                              width: 28,
+                              height: 25,
+                              width: 25,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: AppColors.white[80],
@@ -150,6 +150,7 @@ class _PlayersState extends State<Players> {
                               child: Center(
                                 child: Text(
                                   playerStats?[index].playerName?.substring(0, 1) ?? "",
+                                  style: TextStyle(fontSize: SizeUtils.fSize_13()),
                                   // textAlign: TextAlign.center,
                                 ),
                               ),
@@ -160,8 +161,8 @@ class _PlayersState extends State<Players> {
                             AppText(
                               text: '${playerStats?[index].playerName}',
                               color: AppColors.black,
-                              fontSize: SizeUtils.fSize_14(),
-                              letterSpacing: 0.5,
+                              fontSize: SizeUtils.fSize_13(),
+                              // letterSpacing: 0.5,
                               fontWeight: FontWeight.w400,
                             ),
                           ],
@@ -177,8 +178,8 @@ class _PlayersState extends State<Players> {
                             //     )),
                             playerStats?[index].playsOnHomeTeam == true
                                 ? Container(
-                                    height: 22,
-                                    width: 22,
+                                    height: 20,
+                                    width: 20,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       // color: AppColors.white[80],
@@ -191,8 +192,8 @@ class _PlayersState extends State<Players> {
                                     ),
                                   )
                                 : Container(
-                                    height: 22,
-                                    width: 22,
+                                    height: 20,
+                                    width: 20,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       // color: AppColors.white[80],
@@ -216,8 +217,8 @@ class _PlayersState extends State<Players> {
                                   child: AppText(
                                     text: playerStatsData(rowIndex, playerStats![index]).toString(),
                                     color: AppColors.black,
-                                    fontSize: SizeUtils.fSize_14(),
-                                    letterSpacing: 0.5,
+                                    fontSize: SizeUtils.fSize_13(),
+                                    // letterSpacing: 0.5,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),

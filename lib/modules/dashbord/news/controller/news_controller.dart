@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class NewsController extends GetxController {
   RxBool isNewsLoading = false.obs;
   Rx<NewsModal> newsData = NewsModal().obs;
-
+  RxBool isLoading = true.obs;
   Future getNewsData() async {
     try {
       isNewsLoading.value = true;
@@ -33,9 +33,7 @@ class NewsController extends GetxController {
         return "${(diff.inDays / 30).floor()} ${(diff.inDays / 30).floor() == 1 ? "month" : "months"} ago";
       }
       if (diff.inDays > 0) {
-        return (diff.inDays / 7).floor() == 1
-            ? "yesterday ${DateFormat('hh:mm').format(d)}"
-            : "${(diff.inDays / 7).floor()} days ago";
+        return (diff.inDays / 7).floor() == 1 ? "yesterday ${DateFormat('hh:mm').format(d)}" : "${(diff.inDays / 7).floor()} days ago";
       }
 
       if (diff.inDays > 7) {
@@ -57,15 +55,15 @@ class NewsController extends GetxController {
 
   String dateFormat(DateTime date) {
     String? amPm;
-    var formatter = DateFormat('dd. MMM hh:mm');
-    int hours = date.hour;
+    var formatter = DateFormat('MMM dd, yyyy');
+    // int hours = date.hour;
 
-    if (hours > 12) {
-      amPm = "PM";
-    } else {
-      amPm = "AM";
-    }
-    String formattedDate = "${formatter.format(date)} $amPm";
+    // if (hours > 12) {
+    //   amPm = "PM";
+    // } else {
+    //   amPm = "AM";
+    // }
+    String formattedDate = "${formatter.format(date)}";
     return formattedDate;
   }
 

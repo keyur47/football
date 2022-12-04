@@ -234,6 +234,7 @@ class _KFDrawerState extends State<KFDrawer> with TickerProviderStateMixin {
                               borderRadius: BorderRadius.all(Radius.circular(_shadowBorderRadius)),
                               child: Container(
                                 decoration: BoxDecoration(
+
                                   //   borderRadius: BorderRadius.circular(50),
                                   // border: Border.all(
                                   //   width: 2,

@@ -1,3 +1,4 @@
+import 'package:football/ads/banner_ad.dart';
 import 'package:football/model/arguments_match_detail_model.dart';
 import 'package:football/modules/dashbord/home/controller/home_controller.dart';
 import 'package:football/modules/dashbord/home/screen/scores/screen/stats/player_detail_screen.dart';
@@ -89,7 +90,15 @@ class _StatsScreenState extends State<StatsScreen> {
                   ? TeamStats()
                   : Players(
                       arg: arg,
-                    ))
+                    )),
+              Obx(
+                () => isBannerLoaded.value == true
+                    ? const SizedBox(
+                        height: 52,
+                        width: double.infinity,
+                      )
+                    : SizedBox(),
+              )
             ],
           ),
         ),

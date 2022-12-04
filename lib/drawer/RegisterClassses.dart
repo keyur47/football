@@ -1,8 +1,7 @@
-
-
 import 'package:football/modules/dashbord/home/screen/home_screen.dart';
 import 'package:football/modules/dashbord/news/screen/news_screen.dart';
 import 'package:football/modules/dashbord/ranking/screen/ranking_screen.dart';
+import 'package:football/modules/dashbord/setting/setting_screen.dart';
 
 typedef T Constructor<T>();
 
@@ -17,6 +16,7 @@ class ClassBuilder {
     register<HomeScreen>(() => HomeScreen());
     register<NewsScreen>(() => NewsScreen());
     register<RankingScreen>(() => RankingScreen());
+    register<SettingScreen>(() => SettingScreen());
   }
 
   static dynamic fromString(String type) {

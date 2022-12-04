@@ -4,9 +4,9 @@ import 'package:football/modules/dashbord/home/screen/home_screen.dart';
 import 'package:football/modules/dashbord/home/screen/scores/screen/lineup/lineup_screen.dart';
 import 'package:football/modules/dashbord/home/screen/scores/screen/scores_tabbar_screen.dart';
 import 'package:football/modules/dashbord/home/screen/scores/screen/stats/player_detail_screen.dart';
-import 'package:football/modules/dashbord/more/screen/more_screen.dart';
 import 'package:football/modules/dashbord/news/screen/detailed_news_screen.dart';
 import 'package:football/modules/dashbord/news/screen/news_screen.dart';
+import 'package:football/modules/dashbord/news/screen/news_web_view.dart';
 import 'package:football/modules/dashbord/ranking/screen/ranking_screen.dart';
 import 'package:football/modules/splash/screen/splash_screen.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,6 @@ mixin Routes {
 
   // get started
   static const String splash = '/splash';
-  static const String dashBordScreen = '/dashBordScreen';
   static const String drawerScreen = '/drawerScreen';
   static const String homeScreen = '/homeScreen';
   static const String scoresScreen = '/scoresScreen';
@@ -26,6 +25,7 @@ mixin Routes {
   static const String detailedNews = '/detailedNews';
   static const String lineUpScreen = '/lineUpScreen';
   static const String playerDetailScreen = '/playerDetailScreen';
+  static const String newsWebViewScreen = '/newsWebViewScreen';
 
   static List<GetPage<dynamic>> routes = [
     GetPage<dynamic>(
@@ -33,11 +33,11 @@ mixin Routes {
       page: () => const SplashScreen(),
       transition: defaultTransition,
     ),
-    // GetPage<dynamic>(
-    //   name: dashBordScreen,
-    //   page: () => const DashBordScreen(),
-    //   transition: defaultTransition,
-    // ),
+    GetPage<dynamic>(
+      name: drawerScreen,
+      page: () => const DrawerScreen(),
+      transition: defaultTransition,
+    ),
     GetPage<dynamic>(
       name: homeScreen,
       page: () => HomeScreen(),
@@ -49,11 +49,6 @@ mixin Routes {
       transition: defaultTransition,
     ),
     GetPage<dynamic>(
-      name: drawerScreen,
-      page: () => DrawerScreen(),
-      transition: defaultTransition,
-    ),
-    GetPage<dynamic>(
       name: newsScreen,
       page: () => NewsScreen(),
       transition: defaultTransition,
@@ -61,11 +56,6 @@ mixin Routes {
     GetPage<dynamic>(
       name: rankingScreen,
       page: () => RankingScreen(),
-      transition: defaultTransition,
-    ),
-    GetPage<dynamic>(
-      name: moreScreen,
-      page: () => MoreScreen(),
       transition: defaultTransition,
     ),
     GetPage<dynamic>(
@@ -81,6 +71,11 @@ mixin Routes {
     GetPage<dynamic>(
       name: playerDetailScreen,
       page: () => PlayerDetailScreen(),
+      transition: defaultTransition,
+    ),
+    GetPage<dynamic>(
+      name: newsWebViewScreen,
+      page: () => const NewsWebView(),
       transition: defaultTransition,
     ),
   ];

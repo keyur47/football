@@ -16,6 +16,9 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 class HomeController extends GetxController {
   RxList<CombineTeamsModel>? combileTemes = <CombineTeamsModel>[].obs;
   RxList<TempModel>? tempModel = <TempModel>[].obs;
+  RxList<Gd2Model> teamOne = <Gd2Model>[].obs;
+  RxList<Gd2Model> teamTwo = <Gd2Model>[].obs;
+  RxList<Gd2Model> gdeName = <Gd2Model>[].obs;
   Rx<MatchDetailsModel>? matchDetailsModel = MatchDetailsModel().obs;
   RxBool isLoading = false.obs;
   RxBool isFactsLoading = false.obs;
@@ -102,6 +105,7 @@ class HomeController extends GetxController {
       isFactsLoading.value = true;
       String json = await HomeService.matchDetailsApi(matchID: matchID);
       matchDetailsModel?.value = MatchDetailsModel.fromJson(jsonDecode(json));
+
       for (Gd2Model element in matchDetailsModel?.value.root?.gd2 ?? []) {
         // print('commentName 555: ${element.minutesPlayer}');
         int? index = matchDetailsModel?.value.root?.gd2?.indexWhere((ele) {
@@ -123,6 +127,7 @@ class HomeController extends GetxController {
       }
       // print("Abc =====>${matchDetailsModel?.value.root?.detailedstats?.playerStats?.length}");
       matchDetailsModel?.value.root?.detailedstats?.playerStats?.forEach((element) {
+        print("object");
         if (element.playsOnHomeTeam == true) {
           homeTeamRow.add(element);
         } else {

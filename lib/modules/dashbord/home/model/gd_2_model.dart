@@ -20,15 +20,16 @@ class Gd2Model {
   final String? imageHashtags;
   final String? minutesPlayer;
   final String? commentsPlayer;
-  final String? split3;
+  String? split3;
   final String? split4;
   final String? split5;
   final String? split6;
   final String? playerId;
   final String? split8;
-  final String? split9;
+  String? split9;
   final String? split10;
-  final String? split11;
+  String? split11;
+
   final PlayerModel? playerModel;
 
   factory Gd2Model.fromRawJson(String str) => Gd2Model.fromJson(json.decode(str));
@@ -104,5 +105,6 @@ class Gd2Model {
 class PlayerModel {
   List<String>? gd21;
   String? id;
+
   PlayerModel({this.id, this.gd21});
 }

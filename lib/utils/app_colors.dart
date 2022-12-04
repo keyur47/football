@@ -28,15 +28,17 @@ class AppColors {
     200: Color(0xFFDE4343),
   });
 
-  static const MaterialColor green = MaterialColor(0xFF6EC844, <int, Color>{
-    100: Color(0xFF6EC844),
-    200: Color(0xFF1B8F39),
+  static const MaterialColor green = MaterialColor(0xFF44964E, <int, Color>{
+    100: Color(0xFF44964E),
+    200: Color(0xFF44964E),
+    // 100: Color(0xFF1B8F39),
+    // 200: Color(0xFF6EC844),
   });
   static const MaterialColor orange = MaterialColor(0xFFfe8b02, <int, Color>{
     100: Color(0xFFfe8b02),
   });
-  static const MaterialColor primaryColor = MaterialColor(0xFF791435, <int, Color>{
-    100: Color(0xFF791435),
+  static const MaterialColor primaryColor = MaterialColor(0xFF44964E, <int, Color>{
+    100: Color(0xFF44964E),
   });
   static const MaterialColor grey = MaterialColor(0xFF5F5F5F, <int, Color>{
     10: Color(0xFF414141),
